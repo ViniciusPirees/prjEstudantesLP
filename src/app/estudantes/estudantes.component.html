@@ -1,4 +1,4 @@
-<h2>Estudantes</h2>
+<!-- <h2>Estudantes</h2>
 <ul class="estudantes">
   <li *ngFor="let estudantes of estudantes"
     [class.selected]="estudantes === estudanteSele"
@@ -27,3 +27,15 @@
   <input id="celular" [(ngModel)]="estudanteSele.celular" placeholder="celular">
   <br><br>
 </div>
+-->
+<h2>Estudantes</h2>
+
+<ul class="estudantes">
+  <li *ngFor="let estudantes of estudantes"
+    [class.selected]="estudantes === estudanteSele"
+    (click)="onSelect(estudantes)">
+    <span class="badge">{{estudantes.id}}</span> {{estudantes.nome}}
+  </li>
+</ul>
+
+<app-estudantes-detalhe [estudantes]="estudanteSele"></app-estudantes-detalhe>
