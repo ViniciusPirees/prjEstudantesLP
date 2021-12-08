@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Estudantes } from '../estudantes';
-import { MensagemService } from '../mensagem.service';
+
 import { EstudantesService } from '../estudantes.service';
+import { MensagemService } from '../mensagem.service';
 
 @Component({
   selector: 'app-estudantes',
@@ -10,7 +11,6 @@ import { EstudantesService } from '../estudantes.service';
 })
 export class EstudantesComponent implements OnInit {
 
-  estudanteSele?: Estudantes;
   estudantes: Estudantes [] = [];
 
   constructor(private estudantesService: EstudantesService, private mensagemService: MensagemService) { }
@@ -19,14 +19,24 @@ export class EstudantesComponent implements OnInit {
     this.getEstudantes();
   }
 
-  onSelect(estudantes: Estudantes): void {
-    this.estudanteSele = estudantes;
-    this.mensagemService.add(`EstudantesComponent: ID do Estudante Selecionado=${estudantes.id}`);
-  }
-
   getEstudantes(): void {
     this.estudantesService.getEstudantes()
         .subscribe(estudantes => this.estudantes = estudantes);
   }
 
+  add(nome: string): void {
+    nome = nome.trim();
+    if (!nome) { return; }
+    this.estudantesService.addEstudante({ nome } as Estudantes)
+      .subscribe(estudantes => {
+        this.estudantes.push(estudantes);
+      });
+  }
+
+  delete(estudantes: Estudantes): void {
+    this.estudantes = this.estudantes.filter(e => e !== estudantes);
+    this.estudantesService.deleteEstudante(estudantes.id).subscribe();
+  }
+
 }
+

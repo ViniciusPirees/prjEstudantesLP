@@ -1,4 +1,15 @@
 <div *ngIf="estudantes">
+    <h2>{{estudantes.nome | uppercase}} Detalhes</h2>
+    <div><span>id: </span>{{estudantes.id}}</div>
+    <div>
+      <label for="estudantes-nome">Nome do estudante: </label>
+      <input id="estudantes-nome" [(ngModel)]="estudantes.nome" placeholder="Nome do estudante"/>
+    </div>
+    <button (click)="goBack()">Voltar</button>
+    <button (click)="save()">Salvar</button>
+  </div>
+<!--
+    <div *ngIf="estudantes">
 
     <h2>{{estudantes.nome | uppercase}} Detalhes</h2>
     <div><span>id: </span>{{estudantes.id}}</div>
@@ -19,4 +30,4 @@
         <input id="celular" [(ngModel)]="estudantes.celular" placeholder="celular">
         <br><br>
     </div>
-</div>
+</div> --> 
